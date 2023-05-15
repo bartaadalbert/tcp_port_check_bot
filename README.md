@@ -18,6 +18,13 @@ The login notification script sends a notification to a Telegram bot when a user
 6. Optionally, customize the message content as per your requirements.
 7. Save the changes and restart the SSH service.
 
+To obtain your chat ID for a Telegram bot, you can follow these steps:
+
+    Start a chat with your Telegram bot.
+    Open a web browser and enter the following URL, replacing <YOUR_BOT_TOKEN> with your actual bot token:
+    https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates
+Make sure your bot is already added as a member of the chat or has received a message from you before trying to retrieve the chat ID.
+
 ## Port Check Script
 
 The port check script allows you to monitor the status of specific ports and sends a notification to a Telegram bot when a port goes up or down. To use the script, follow these steps:
