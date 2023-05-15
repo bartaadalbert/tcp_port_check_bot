@@ -58,6 +58,55 @@ To set up a tunnel from your local machine to a remote server, follow these step
 6. Start the service using the command `sudo systemctl start <service-name>`.
 7. Enable the service to start on boot using the command `sudo systemctl enable <service-name>`.
 
+
+To access your local machine without relying on a public IP address from your ISP, you can set up a tunnel using a remote server with a public IP. This allows you to forward traffic from specific services on your local machine to the remote server, effectively accessing those services through the remote server.
+
+Here's a general overview of the steps involved:
+
+1. Obtain a remote server with a public IP address. You can rent a VPS (Virtual Private Server) from a cloud provider like AWS, DigitalOcean, or Linode.
+
+2. Connect to the remote server using SSH. You can use the following command in your local terminal:
+
+   ```
+   ssh user@remote_server_ip
+   ```
+
+   Replace `user` with your username on the remote server and `remote_server_ip` with the IP address of the remote server.
+
+3. Set up port forwarding to create a tunnel from your local machine to the remote server. Depending on the service you want to access, you can use different options:
+
+   - For SSH access: Use the `-L` option to forward a local port to the remote server's SSH port. For example, to forward local port 2222 to the remote server's SSH port (usually 22), use the following command:
+
+     ```
+     ssh -L 2222:localhost:22 user@remote_server_ip
+     ```
+
+   - For VNC access: Use the `-L` option to forward a local port to the remote server's VNC port. For example, to forward local port 5901 to the remote server's VNC port (usually 5900), use the following command:
+
+     ```
+     ssh -L 5901:localhost:5900 user@remote_server_ip
+     ```
+
+   - For HTTP web service: Use the `-L` option to forward a local port to the remote server's HTTP port. For example, to forward local port 8080 to the remote server's HTTP port (usually 80), use the following command:
+
+     ```
+     ssh -L 8080:localhost:80 user@remote_server_ip
+     ```
+
+   Adjust the port numbers as per your requirements.
+
+4. Once the SSH connection is established with port forwarding, you can access the service on your local machine by using `localhost` and the forwarded port. For example, for the SSH tunnel with local port 2222, you can SSH into your local machine using:
+
+   ```
+   ssh -p 2222 user@localhost
+   ```
+
+   Similarly, for other services, you can use the `localhost` and the corresponding forwarded port.
+
+Remember to keep the SSH connection active for the tunnel to remain accessible. If the connection is interrupted, you may need to re-establish the SSH connection and set up the tunnel again.
+
+This setup allows you to securely access your local machine's services through the remote server's public IP address. You can modify the tunnel configuration as needed for your specific use case.
+
 That's it! You should now have the login notification script, port check script, and instructions for setting up tunnels on macOS and Ubuntu.
 
 For more details and additional customization options, please refer to the individual script files and provided documentation.
