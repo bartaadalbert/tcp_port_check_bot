@@ -1,0 +1,17 @@
+[Unit]
+Description=Tunnel VNC to your host port 5599
+After=network.target
+
+[Service]
+Environment="AUTOSSH_GATETIME=0"
+Environment="LOCAL_PORT=5901"
+Environment="REMOTE_PORT=5599"
+Environment="SERVER_PORT=22"
+Environment="REMOTE_HOST=root@1.1.1.1"
+ExecStart=/usr/bin/autossh -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -R ${REMOTE_PORT}:localhost:${LOCAL_PORT} -N ${REMOTE_HOST} -p ${SERVER_PORT}
+#ExecStart=/usr/bin/ssh -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -N -R ${REMOTE_PORT}:localhost:${LOCAL_PORT} ${REMOTE_HOST} -p ${SERVER_PORT}
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

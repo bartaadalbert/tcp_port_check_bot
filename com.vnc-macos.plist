@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+   <dict>
+      <key>Label</key>
+      <string>vnc.tunnel</string>
+      <key>ProgramArguments</key>
+      <array>
+        <string>/usr/bin/ssh</string>
+        <string>-o ControlMaster=no</string>
+        <string>-o ServerAliveInterval=60</string>
+        <string>-o ExitOnForwardFailure=yes</string>
+        <string>-o StrictHostKeyChecking=no</string>
+        <string>-R 5959:localhost:5900</string>
+        <string>-NT</string>
+        <string>root@yourserver.com</string>
+      </array>
+      <key>RunAtLoad</key>
+      <true/>
+      <key>KeepAlive</key>
+      <true/>
+      <key>StartInterval</key>
+      <integer>30</integer>
+        <!-- <key>StandardErrorPath</key>
+        <string>/path/to/error.log</string> -->
+        <!-- <key>StandardOutPath</key>
+        <string>/path/to/output.log</string> -->
+      <key>RestartInterval</key>
+      <integer>3600</integer>
+   </dict>
+</plist>
